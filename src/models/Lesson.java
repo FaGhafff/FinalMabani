@@ -37,4 +37,14 @@ public class Lesson {
     public void setPresented(boolean presented) {
         isPresented = presented;
     }
+
+    @Override
+    public String toString() {
+        return "Lesson{" +
+                "id=" + id +
+                ", unit=" + unit +
+                ", name='" + name + '\'' +
+                ", isPresented=" + isPresented +
+                '}';
+    }
 }

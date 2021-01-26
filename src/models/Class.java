@@ -66,4 +66,17 @@ public class Class {
     public void setStudents(Set<Student> students) {
         this.students = students;
     }
+
+    @Override
+    public String toString() {
+        return "Class{" +
+                "id=" + id +
+                ", time='" + time + '\'' +
+                ", master=" + master +
+                ", lesson=" + lesson +
+                ", students=" + students +
+                ", capacity=" + capacity +
+                ", isEnable=" + isEnable +
+                '}';
+    }
 }
