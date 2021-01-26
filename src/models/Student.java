@@ -1,8 +1,9 @@
 package models;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
-public class Student extends Person{
+public class Student extends Person implements Serializable {
     private HashMap<Lesson,Double> lessons;
 
     @Override

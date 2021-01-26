@@ -1,8 +1,9 @@
 package models;
 
+import java.io.Serializable;
 import java.util.Set;
 
-public class Class {
+public class Class implements Serializable {
     private long id;
     private String time;
     private Master master;

@@ -1,6 +1,8 @@
 package models;
 
-public class Lesson {
+import java.io.Serializable;
+
+public class Lesson implements Serializable {
     private long id;
     private int unit;
     private String name;

@@ -1,6 +1,8 @@
 package models;
 
-public class Admin extends Person{
+import java.io.Serializable;
+
+public class Admin extends Person implements Serializable {
     public static Admin getInstance() {
         Admin admin = new Admin();
         admin.setFirstName("Fatemeh");
