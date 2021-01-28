@@ -9,7 +9,7 @@ import models.Class;
 import java.io.*;
 import java.util.ArrayList;
 
-
+//fixme handle EOFException and null for returns
 class DataBase {
     private static String STUDENT_FILE_ADDRESS = "student.dat";
     private static String MASTER_FILE_ADDRESS = "master.dat";
@@ -24,19 +24,19 @@ class DataBase {
 
     DataBase() throws IOException {
         studentFile = new File(STUDENT_FILE_ADDRESS);
-        if (studentFile.exists())
+        if (!studentFile.exists())
             studentFile.createNewFile();
         masterFile = new File(MASTER_FILE_ADDRESS);
-        if (masterFile.exists())
+        if (!masterFile.exists())
             masterFile.createNewFile();
         classFile = new File(CLASS_FILE_ADDRESS);
-        if (classFile.exists())
+        if (!classFile.exists())
             classFile.createNewFile();
         lessonFile = new File(LESSON_FILE_ADDRESS);
-        if (lessonFile.exists())
+        if (!lessonFile.exists())
             lessonFile.createNewFile();
         adminFile = new File(ADMIN_FILE_ADDRESS);
-        if (adminFile.exists())
+        if (!adminFile.exists())
             adminFile.createNewFile();
     }
 
@@ -64,11 +64,13 @@ class DataBase {
     }
 
     protected ArrayList<Master> readMasters() {
-        ArrayList<Master> list = null;
+        ArrayList<Master> list = new ArrayList<>();
         try {
             ObjectInputStream stream = new ObjectInputStream(new FileInputStream(masterFile));
             list = (ArrayList<Master>) stream.readObject();
             stream.close();
+        } catch (EOFException e){
+            System.out.println(e.getMessage());
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
