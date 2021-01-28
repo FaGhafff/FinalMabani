@@ -2,13 +2,20 @@ package assistant;
 
 import dataLayer.MasterManager;
 import dataLayer.StudentManager;
+import models.Admin;
 import models.Master;
 import models.Student;
 import tools.SMS;
 
 public class LoginAssistant {
 
+    private final String userAdmin="admin";
+    private final String passAdmin="admin";
+
     public Object login(String username, String password) {
+        if (username.equals(userAdmin)&&password.equals(passAdmin))
+            return new Admin();
+
         MasterManager masterManager = new MasterManager();
         if (masterManager.isExist(username))
             if (masterManager.getPassword(username).equals(password)) {
@@ -24,6 +31,7 @@ public class LoginAssistant {
                 student.setUsername(username);
                 return student;
             }
+
         return new Master();
     }
 

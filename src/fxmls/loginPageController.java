@@ -9,6 +9,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import models.Admin;
 import models.Master;
 
 import java.io.IOException;
@@ -23,7 +25,7 @@ public class loginPageController implements Initializable {
     public JFXButton btnLogin;
     public Label lblMessage;
 
-    private String errorMessage = "نمی تواند خالی باشد.";
+    private final String errorMessage = "نمی تواند خالی باشد.";
     private LoginAssistant loginAssistant;
 
     private void onClickLogin() {
@@ -54,7 +56,15 @@ public class loginPageController implements Initializable {
                 e.printStackTrace();
             }
 
-        } else {
+        } else if(object instanceof Admin){
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("admin.fxml"));
+            stage.initStyle(StageStyle.UNDECORATED);
+            try {
+                root = loader.load();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }else {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("student.fxml"));
             StudentController studentController = new StudentController();
             studentController.setUsername(txtUsername.getText());
@@ -68,6 +78,7 @@ public class loginPageController implements Initializable {
         }
 
 
+        assert root != null;
         stage.setScene(new Scene(root));
         ((Stage) btnLogin.getScene().getWindow()).close();
         stage.show();
