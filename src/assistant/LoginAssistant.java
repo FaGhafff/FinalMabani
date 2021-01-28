@@ -2,24 +2,11 @@ package assistant;
 
 import dataLayer.MasterManager;
 import dataLayer.StudentManager;
-import javafx.stage.Stage;
-import models.Class;
 import models.Master;
 import models.Student;
 import tools.SMS;
 
 public class LoginAssistant {
-    private String username;
-
-    LoginAssistant() {
-    }
-    //login
-
-    public static void main(String[] args) {
-        LoginAssistant loginAssistant = new LoginAssistant();
-        System.out.println(loginAssistant.login("", "") instanceof Class);
-
-    }
 
     public Object login(String username, String password) {
         MasterManager masterManager = new MasterManager();
