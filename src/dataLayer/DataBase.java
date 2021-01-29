@@ -1,10 +1,7 @@
 package dataLayer;
 
-import models.Admin;
-import models.Lesson;
-import models.Master;
-import models.Student;
 import models.Class;
+import models.*;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -46,6 +43,8 @@ class DataBase {
             ObjectInputStream stream = new ObjectInputStream(new FileInputStream(studentFile));
             list = (ArrayList<Student>) stream.readObject();
             stream.close();
+        } catch (EOFException e) {
+            System.out.println("DataBase.readStudents");
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -69,8 +68,8 @@ class DataBase {
             ObjectInputStream stream = new ObjectInputStream(new FileInputStream(masterFile));
             list = (ArrayList<Master>) stream.readObject();
             stream.close();
-        } catch (EOFException e){
-            System.out.println(e.getMessage());
+        } catch (EOFException e) {
+            System.out.println("DataBase.readMasters");
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -94,6 +93,8 @@ class DataBase {
             ObjectInputStream stream = new ObjectInputStream(new FileInputStream(lessonFile));
             list = (ArrayList<Class>) stream.readObject();
             stream.close();
+        } catch (EOFException e) {
+            System.out.println("DataBase.readClasses");
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -117,6 +118,8 @@ class DataBase {
             ObjectInputStream stream = new ObjectInputStream(new FileInputStream(lessonFile));
             list = (ArrayList<Lesson>) stream.readObject();
             stream.close();
+        } catch (EOFException e) {
+            System.out.println("DataBase.readLessons");
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
