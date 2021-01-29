@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="300.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxmls.AddStudentController">
+   <children>
+      <Label layoutX="158.0" layoutY="27.0" text="افزودن دانشجو">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="txtFirstName" alignment="CENTER_RIGHT" labelFloat="true" layoutX="243.0" layoutY="80.0" promptText="نام" />
+      <JFXTextField fx:id="txtLastName" alignment="CENTER_RIGHT" labelFloat="true" layoutX="23.0" layoutY="80.0" promptText="نام خانوادگی" />
+      <JFXTextField fx:id="txtIdNumber" alignment="CENTER_RIGHT" labelFloat="true" layoutX="243.0" layoutY="140.0" promptText="شماره ملی" />
+      <JFXTextField fx:id="txtPhoneNumber" alignment="CENTER_RIGHT" labelFloat="true" layoutX="23.0" layoutY="140.0" promptText="شماره تلفن" />
+      <JFXTextField fx:id="txtUsername" alignment="CENTER_RIGHT" labelFloat="true" layoutX="243.0" layoutY="200.0" promptText="نام کاربری" />
+      <JFXTextField fx:id="txtPassword" alignment="CENTER_RIGHT" labelFloat="true" layoutX="23.0" layoutY="200.0" promptText="رمز عبور" />
+      <JFXButton fx:id="btnExit" layoutX="23.0" layoutY="261.0" text="خروج" />
+      <JFXButton fx:id="btnAdd" layoutX="91.0" layoutY="261.0" text="افزودن" />
+      <Label fx:id="lblMessage" layoutX="150.0" layoutY="264.0" prefHeight="20.0" prefWidth="231.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
