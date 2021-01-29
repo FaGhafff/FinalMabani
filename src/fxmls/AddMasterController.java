@@ -7,12 +7,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import models.Master;
-import models.Student;
 
 import java.net.URL;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class AddMasterController implements Initializable {
