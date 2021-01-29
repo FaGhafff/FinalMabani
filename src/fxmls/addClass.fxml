@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="279.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxmls.AddClassController">
+   <Label layoutX="160.0" layoutY="22.0" text="افزودن کلاس">
+      <font>
+         <Font size="16.0" />
+      </font>
+   </Label>
+   <JFXTextField fx:id="txtCode" alignment="CENTER_RIGHT" labelFloat="true" layoutX="251.0" layoutY="72.0" promptText="کد کلاس" />
+   <JFXTextField fx:id="txtTime" alignment="CENTER_RIGHT" labelFloat="true" layoutX="251.0" layoutY="132.0" promptText="زمان برگزاری" />
+   <JFXButton fx:id="btnExit" layoutX="24.0" layoutY="240.0" text="خروج" />
+   <JFXButton fx:id="btnAdd" layoutX="92.0" layoutY="240.0" text="اضافه کردن" />
+   <JFXComboBox fx:id="comboMaster" labelFloat="true" layoutX="46.0" layoutY="72.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="25.0" prefWidth="135.0" promptText="نام استاد" />
+   <JFXComboBox fx:id="comboLesson" labelFloat="true" layoutX="46.0" layoutY="132.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="25.0" prefWidth="135.0" promptText="نام درس" />
+   <JFXTextField fx:id="txtCapacity" alignment="CENTER_RIGHT" labelFloat="true" layoutX="251.0" layoutY="192.0" promptText="ظرفیت" />
+</AnchorPane>
