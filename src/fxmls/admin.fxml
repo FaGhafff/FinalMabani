@@ -11,7 +11,6 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxmls.AdminController">
    <children>
       <JFXTabPane prefHeight="600.0" prefWidth="800.0" rotateGraphic="true" side="RIGHT" tabMaxHeight="90.0" tabMaxWidth="90.0" tabMinHeight="90.0" tabMinWidth="90.0">
@@ -69,7 +68,11 @@
             </Tab>
             <Tab>
                <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="tblMaster" layoutX="19.0" layoutY="21.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="499.0" prefWidth="673.0" />
+                        <JFXButton fx:id="btnAddMaster" layoutX="321.0" layoutY="531.0" prefHeight="42.0" prefWidth="69.0" text="افزودن " />
+                     </children></AnchorPane>
                </content>
                <graphic>
                   <BorderPane prefHeight="90.0" prefWidth="90.0" rotate="-90.0">
