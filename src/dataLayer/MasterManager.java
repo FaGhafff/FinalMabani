@@ -4,6 +4,7 @@ import models.Master;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class MasterManager {
     private DataBase dataBase;
@@ -14,9 +15,7 @@ public class MasterManager {
             e.printStackTrace();
         }
     }
-    //add master
-    //add lesson for master
-    //add number for student
+
     //is master exist
     public boolean isExist(String username){
         for (Master readMaster : dataBase.readMasters()) {
@@ -43,6 +42,14 @@ public class MasterManager {
     }
 
     public ArrayList<Master> getMastersList() {
-        return null;
+        return dataBase.readMasters();
+    }
+
+    public boolean save(Master master) {
+        ArrayList<Master> list = dataBase.readMasters();
+        master.setClasses(new HashSet<>());
+        list.add(master);
+        dataBase.writeMasters(list);
+        return true;
     }
 }
