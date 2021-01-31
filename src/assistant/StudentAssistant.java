@@ -11,6 +11,7 @@ import models.Student;
 import tables.ReportCardStudentModel;
 import tables.SelectUnitStudentModel;
 
+import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -84,12 +85,14 @@ public class StudentAssistant {
         });
         return result;
     }
-
+    //username is students username and selected are class ids that student selected
     public void saveSelections(String username, ArrayList<String> selectedCodes) {
        StudentManager studentManager = new StudentManager();
        ClassManager classManager = new ClassManager();
         for (String selectedCode : selectedCodes) {
+            //add lesson of class to students lesson list
             studentManager.addClass(username,selectedCode);
+            //add student to students of class
             classManager.addStudent(selectedCode,username);
         }
     }
