@@ -1,16 +1,25 @@
-import models.Student;
+import models.Master;
 import tools.SMS;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public class Test {
     //class for unit testing
     public static void main(String[] args) throws IOException {
 
-        SMS sms = new SMS("09145030651");
-        sms.setMessage("test message : code is 1234");
-        System.out.println(sms.send());
+        ArrayList<Master> list = new ArrayList<>();
+        Master master = new Master();
+        master.setFirstName("fatemeh");
+        master.setLastName("ghafouri");
 
+        list.add(master);
+        master = new Master();
+        master.setFirstName("ali");
+        master.setLastName("forghani");
+        list.add(master);
+        ArrayList<String> l = list.stream().map(master1 -> master1.getFirstName()+" "+master1.getLastName()).collect(Collectors.toCollection(ArrayList::new));
+        l.forEach(s -> System.out.println(s));
     }
 }

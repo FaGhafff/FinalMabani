@@ -55,14 +55,13 @@ public class AdminController implements Initializable {
         TableColumn<ClassAdminModel, JFXToggleButton> cEnable = new TableColumn<>("فعال / غیر فعال");
         cEnable.setCellValueFactory(new PropertyValueFactory<>("enable"));
 
-        tblClass.getColumns().addAll(cRow,cName,cCode,cMasterName,cCapacity,cEnable);
+        tblClass.getColumns().addAll(cRow, cName, cCode, cMasterName, cCapacity, cEnable);
         tblClass.setItems(adminAssistant.getClassTableData());
-
     }
 
     private void onClickSaveClass() {
-        HashMap<Long,Boolean> hashMap = new HashMap<>();
-        tblClass.getItems().forEach(classAdminModel -> hashMap.put(Long.valueOf(classAdminModel.getCode()),classAdminModel.getEnable().isSelected()));
+        HashMap<Long, Boolean> hashMap = new HashMap<>();
+        tblClass.getItems().forEach(classAdminModel -> hashMap.put(Long.valueOf(classAdminModel.getCode()), classAdminModel.getEnable().isSelected()));
         adminAssistant.saveClasses(hashMap);
     }
 
@@ -134,7 +133,13 @@ public class AdminController implements Initializable {
         tblMaster.getColumns().addAll(cRow, cFirstName, cLastName, cIdNumber, cPhoneNumber, cSend);
 
         tblMaster.setItems(adminAssistant.getMasterTableData());
+        tblMaster.getItems().forEach(item->item.getSend().setOnAction(e-> onClickSendUserPass(item.getIdNumber())));
+
         //todo update table after adding new master
+    }
+
+    private void onClickSendUserPass(String idNumber){
+        adminAssistant.sendUserPassMaster(idNumber);
     }
 
     private void onClickAddMaster() {
@@ -147,7 +152,6 @@ public class AdminController implements Initializable {
             e.printStackTrace();
         }
     }
-
 
     //student
 
@@ -174,8 +178,29 @@ public class AdminController implements Initializable {
         tblStudent.getColumns().addAll(cRow, cLastName, cFirstName, cUsername, cPassword, cReport);
 
         tblStudent.setItems(adminAssistant.getStudentsTableData());
-        //todo update table after adding new student
 
+        //init onClick
+        tblStudent.getItems().forEach(studentAdminModel ->
+                studentAdminModel.getReport().setOnAction(e ->
+                        onClickReportCard(studentAdminModel.getUsername())
+                )
+        );
+        //todo update table after adding new student
+    }
+
+    private void onClickReportCard(String username) {
+        Stage stage = new Stage();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("reportCard.fxml"));
+            ReportCardController reportCardController = new ReportCardController();
+            reportCardController.setUsername(username);
+            loader.setController(reportCardController);
+            Parent root = loader.load();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void onClickAddStudent() {
