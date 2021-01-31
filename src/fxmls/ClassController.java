@@ -43,7 +43,7 @@ public class ClassController implements Initializable {
         cGrade.setOnEditCommit(e -> e.getTableView().getItems().get(e.getTablePosition().getRow()).setGrade(e.getNewValue()));
 
         tblClass.getColumns().addAll(cRow,cUsername,cLastName,cFirstName,cGrade);
-        tblClass.setItems(masterAssistant.getClassTableData());
+        tblClass.setItems(masterAssistant.getClassTableData(idClass));
 
     }
 
