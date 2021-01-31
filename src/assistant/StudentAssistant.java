@@ -1,7 +1,6 @@
 package assistant;
 
 import dataLayer.ClassManager;
-import dataLayer.LessonManager;
 import dataLayer.StudentManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -27,9 +26,8 @@ public class StudentAssistant {
         if (student != null) {
             ObservableList<ReportCardStudentModel> list = FXCollections.observableArrayList();
             AtomicInteger i = new AtomicInteger(1);
-            student.getLessons().forEach((lesson, aDouble) -> {
-                list.add(new ReportCardStudentModel(i.getAndIncrement(), lesson.getName(), getMasterNameForLesson(lesson), lesson.getUnit(), aDouble, isPassed(aDouble)));
-            });
+            student.getLessons().forEach((lesson, aDouble) -> list.add(new ReportCardStudentModel(i.getAndIncrement(),
+                    lesson.getName(), getMasterNameForLesson(lesson), lesson.getUnit(), aDouble, isPassed(aDouble))));
             return list;
         } else
             return null;
