@@ -3,8 +3,11 @@ package assistant;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.chart.PieChart;
+import models.Class;
+import models.Master;
 import tables.ClassMasterModel;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class MasterAssistant {
@@ -21,5 +24,13 @@ public class MasterAssistant {
 
     public ObservableList<ClassMasterModel> getClassTableData() {
         return null;
+    }
+
+    public Master getMaster(String username) {
+        return new Master();
+    }
+
+    public ArrayList<Class> getClassForMaster(String username) {
+        return new ArrayList<Class>();
     }
 }

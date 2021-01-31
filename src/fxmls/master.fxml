@@ -1,7 +1,145 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<AnchorPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="fxmls.MasterController"
-    prefHeight="400.0" prefWidth="600.0">
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
 
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxmls.MasterController">
+    <JFXTabPane prefHeight="600.0" prefWidth="800.0" rotateGraphic="true" side="RIGHT" tabMaxHeight="90.0" tabMaxWidth="90.0" tabMinHeight="90.0" tabMinWidth="90.0">
+        <Tab>
+            <graphic>
+                <BorderPane prefHeight="90.0" prefWidth="90.0" rotate="-90.0">
+                    <center>
+                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                            <Image url="@../assets/icons/personal-info-icon.png" />
+                        </ImageView>
+                    </center>
+                    <bottom>
+                        <Label alignment="CENTER" prefHeight="29.0" prefWidth="63.0" text="مشخصات" BorderPane.alignment="CENTER">
+                            <font>
+                                <Font size="11.0" />
+                            </font>
+                        </Label>
+                    </bottom>
+                </BorderPane>
+            </graphic>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                <JFXTextField fx:id="txtFirsName" alignment="CENTER_RIGHT" editable="false" labelFloat="true" layoutX="489.0" layoutY="117.0" promptText="نام" text="علی">
+                    <font>
+                        <Font size="16.0" />
+                    </font>
+                </JFXTextField>
+                <JFXTextField fx:id="txtLastName" alignment="CENTER_RIGHT" editable="false" labelFloat="true" layoutX="175.0" layoutY="117.0" promptText="نام خانوادگی" text="علی">
+                    <font>
+                        <Font size="16.0" />
+                    </font>
+                </JFXTextField>
+                <JFXTextField fx:id="txtIdNumber" alignment="CENTER_RIGHT" editable="false" labelFloat="true" layoutX="489.0" layoutY="225.0" promptText="شماره ملی" text="علی">
+                    <font>
+                        <Font size="16.0" />
+                    </font>
+                </JFXTextField>
+                <JFXTextField fx:id="txtUsername" alignment="CENTER_RIGHT" editable="false" labelFloat="true" layoutX="175.0" layoutY="225.0" promptText="نام کاربری" text="علی">
+                    <font>
+                        <Font size="16.0" />
+                    </font>
+                </JFXTextField>
+            </AnchorPane>
+        </Tab>
+        <Tab>
+            <graphic>
+                <BorderPane prefHeight="90.0" prefWidth="90.0" rotate="-90.0">
+                    <center>
+                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                            <Image url="@../assets/icons/class-icon.png" />
+                        </ImageView>
+                    </center>
+                    <bottom>
+                        <Label alignment="CENTER" prefHeight="29.0" prefWidth="90.0" text="کلاس ها" BorderPane.alignment="CENTER">
+                            <font>
+                                <Font size="10.0" />
+                            </font>
+                        </Label>
+                    </bottom>
+                </BorderPane>
+            </graphic>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+            <TabPane fx:id="tabClass" layoutX="14.0" layoutY="14.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="576.0" prefWidth="671.0" tabClosingPolicy="UNAVAILABLE">
+              <tabs>
+                <Tab text="Untitled Tab 1">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                  </content>
+                </Tab>
+                <Tab>
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="457.0" prefWidth="671.0" />
+                  </content>
+                </Tab>
+              </tabs>
+            </TabPane>
+            </AnchorPane>
+        </Tab>
+        <Tab>
+            <graphic>
+                <BorderPane prefHeight="90.0" prefWidth="90.0" rotate="-90.0">
+                    <center>
+                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                            <Image url="@../assets/icons/chart-icon.png" />
+                        </ImageView>
+                    </center>
+                    <bottom>
+                        <Label alignment="CENTER" prefHeight="29.0" prefWidth="90.0" text="گزارش" BorderPane.alignment="CENTER">
+                            <font>
+                                <Font size="11.0" />
+                            </font>
+                        </Label>
+                    </bottom>
+                </BorderPane>
+            </graphic>
+            <AnchorPane fx:id="parentReportCard" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+            <children>
+               <TabPane fx:id="tabReport" layoutX="20.0" layoutY="12.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="576.0" prefWidth="671.0" tabClosingPolicy="UNAVAILABLE">
+                  <tabs>
+                     <Tab text="Untitled Tab 1">
+                        <content>
+                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                        </content>
+                     </Tab>
+                     <Tab text="Untitled Tab 2">
+                        <content>
+                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="457.0" prefWidth="671.0" />
+                        </content>
+                     </Tab>
+                  </tabs>
+               </TabPane>
+            </children></AnchorPane>
+        </Tab>
+        <Tab>
+            <graphic>
+                <BorderPane prefHeight="90.0" prefWidth="90.0" rotate="-90.0">
+                    <center>
+                        <ImageView fx:id="imgExit" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                            <Image url="@../assets/icons/exit.png" />
+                        </ImageView>
+                    </center>
+                    <bottom>
+                        <Label fx:id="lblExit" alignment="CENTER" prefHeight="29.0" prefWidth="37.0" text="خروج" BorderPane.alignment="CENTER">
+                            <font>
+                                <Font size="11.0" />
+                            </font>
+                        </Label>
+                    </bottom>
+                </BorderPane>
+            </graphic>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+        </Tab>
+    </JFXTabPane>
 </AnchorPane>

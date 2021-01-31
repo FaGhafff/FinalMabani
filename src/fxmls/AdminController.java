@@ -42,6 +42,7 @@ public class AdminController implements Initializable {
 
     //class
     private void initClassTable() {
+
         TableColumn<ClassAdminModel, Integer> cRow = new TableColumn<>("ردیف");
         cRow.setCellValueFactory(new PropertyValueFactory<>("row"));
         TableColumn<ClassAdminModel, String> cName = new TableColumn<>("نام");
