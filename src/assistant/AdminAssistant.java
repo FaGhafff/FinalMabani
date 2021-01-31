@@ -1,5 +1,6 @@
 package assistant;
 
+import dataLayer.ClassManager;
 import dataLayer.LessonManager;
 import dataLayer.MasterManager;
 import dataLayer.StudentManager;
@@ -13,98 +14,99 @@ import tables.ClassAdminModel;
 import tables.LessonAdminModel;
 import tables.MasterAdminModel;
 import tables.StudentAdminModel;
+import tools.SMS;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 public class AdminAssistant {
 
     //get report for student() with username
     //get students list
     public ObservableList<StudentAdminModel> getStudentsTableData() {
-        ArrayList<Student> list = new ArrayList<>();
+        ArrayList<Student> list;
         StudentManager studentManager = new StudentManager();
         list = studentManager.getStudentsList();
         ObservableList<StudentAdminModel> data = FXCollections.observableArrayList();
-//        for (Student student : list) {
-//            data.add(new StudentAdminModel(list.indexOf(student)+1,student.getLastName(),student.getFirstName(),student.getUsername(), student.getPassword()));
-//        }
-
-        //test
-        data.add(new StudentAdminModel(1, "forghhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhani", "ali", "qwe", "qqq"));
-        data.add(new StudentAdminModel(2, "ghafouri", "fatemeh", "ahahah", "aksjaskj"));
-
+        for (Student student : list) {
+            data.add(new StudentAdminModel(list.indexOf(student) + 1, student.getLastName(), student.getFirstName(),
+                    student.getUsername(), student.getPassword()));
+        }
         return data;
     }
 
     public ObservableList<MasterAdminModel> getMasterTableData() {
-        ArrayList<Master> list = new ArrayList<>();
+        ArrayList<Master> list;
         MasterManager masterManager = new MasterManager();
         list = masterManager.getMastersList();
         ObservableList<MasterAdminModel> data = FXCollections.observableArrayList();
-//        for (Master master : list) {
-//            data.add(new MasterAdminModel(list.indexOf(master)+1,master.getFirstName(),master.getLastName(),master.getIdNumber(),master.getPhoneNumber()));
-//        }
-
-        //test
-        data.add(new MasterAdminModel(1, "ali", "aliali", "alialaiila", "laialiailailila"));
-
+        for (Master master : list) {
+            data.add(new MasterAdminModel(list.indexOf(master) + 1, master.getFirstName(), master.getLastName(), master.getIdNumber(), master.getPhoneNumber()));
+        }
         return data;
     }
 
     //add student and return suitable bool
     public boolean addStudent(Student student) {
-        return true;
+        StudentManager studentManager = new StudentManager();
+        return studentManager.save(student);
     }
 
     //add master and return bool
     public boolean addMaster(Master master) {
-        return true;
+        return new MasterManager().save(master);
     }
-    //add lessson and return bool
+
+    //add lesson and return bool
     public boolean addLesson(Lesson lesson) {
-        return true;
+        return new LessonManager().save(lesson);
     }
 
     //get prepared data for lesson table
-    public ObservableList getLessonTableData() {
+    public ObservableList<LessonAdminModel> getLessonTableData() {
         ObservableList<LessonAdminModel> data = FXCollections.observableArrayList();
-        data.add(new LessonAdminModel(1,"alii","234",4,false));
-        data.add(new LessonAdminModel(1,"aalalialiai","2eeeee4",4,true));
+        LessonManager lessonManager = new LessonManager();
+        AtomicInteger i= new AtomicInteger(1);
+        lessonManager.getLessonsList().forEach(lesson -> data.add(new LessonAdminModel(i.getAndIncrement(),
+                lesson.getName(), lesson.getId()+"",lesson.getUnit(),lesson.isPresented())));
         return data;
     }
 
     //return lessons where isPresented is true
-    public ArrayList<Lesson> getPresentedLessons(){
-        return null;
+    public ArrayList<Lesson> getPresentedLessons() {
+        LessonManager lessonManager = new LessonManager();
+        return lessonManager.getLessonsList().stream().filter(Lesson::isPresented).collect(Collectors.toCollection(ArrayList::new));
     }
 
     //update isPresent for Lessons
     public void saveLessons(HashMap<Long, Boolean> hashMap) {
-        hashMap.forEach((aLong, aBoolean) -> System.out.println(aLong+" "+aBoolean));
+        LessonManager lessonManager = new LessonManager();
+        lessonManager.update(hashMap);
     }
 
     public ObservableList<ClassAdminModel> getClassTableData() {
-        ObservableList<ClassAdminModel> data =FXCollections.observableArrayList();
-        data.add(new ClassAdminModel(1,"aliali","12344","mastername",3,true));
-        data.add(new ClassAdminModel(2,"alalalalla","123","mastername",5,false));
+        ObservableList<ClassAdminModel> data = FXCollections.observableArrayList();
+        ClassManager classManager = new ClassManager();
+        int i = 1;
+        for (Class aClass : classManager.readAll()) {
+            data.add(new ClassAdminModel(i++, aClass.getLesson().getName(), aClass.getId() + "",
+                    aClass.getMaster().getFirstName() + " " + aClass.getMaster().getLastName(),
+                    aClass.getCapacity(), aClass.isEnable()));
+        }
         return data;
     }
 
     //update isEnable for classes
     public void saveClasses(HashMap<Long, Boolean> hashMap) {
-        System.out.println("class");
-        hashMap.forEach((aLong, aBoolean) -> System.out.println(aLong+" "+aBoolean));
+        ClassManager classManager = new ClassManager();
+        classManager.updateClass(hashMap);
     }
 
     public ArrayList<Lesson> getLessonsForAddClass() {
-        Lesson lesson= new Lesson();
-        lesson.setName("alialialia");
-        lesson.setId(1212);
-        ArrayList<Lesson> list = new ArrayList<>();
-        list.add(lesson);
-        return list;
+        LessonManager lessonManager = new LessonManager();
+        return lessonManager.getLessonsList().stream().filter(Lesson::isPresented).collect(Collectors.toCollection(ArrayList::new));
     }
 
     public ArrayList<Master> getMastersForAddClass() {
@@ -112,13 +114,19 @@ public class AdminAssistant {
     }
 
     public void addClass(Class aClass) {
-
+        ClassManager classManager = new ClassManager();
+        classManager.save(aClass);
     }
 
     public void sendUserPassMaster(String idNumber) {
-        System.out.println("AdminAssistant.sendUserPassMaster");
-        System.out.println(idNumber);
-
+        MasterManager masterManager = new MasterManager();
+        Master master = masterManager.getMastersList().stream().filter(master1 ->
+                master1.getIdNumber().equals(idNumber)).findFirst().orElse(null);
+        if (master != null) {
+            SMS sms = new SMS(master.getPhoneNumber());
+            sms.setMessage("username is : " + master.getUsername() + " password is : " + master.getPassword());
+            sms.send();
+        }
     }
     //add student
 }
