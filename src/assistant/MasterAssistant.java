@@ -44,7 +44,7 @@ public class MasterAssistant {
     // save grade for student that username and grade in hash map for class with id idClass
     public void saveGrades(HashMap<String, Double> list, String idClass) {
         StudentManager studentManager = new StudentManager();
-        list.forEach(studentManager::setGrade);
+        list.forEach((s, aDouble) -> studentManager.setGrade(s,aDouble,idClass));
     }
 
     public ObservableList<ClassMasterModel> getClassTableData(String idClass) {
