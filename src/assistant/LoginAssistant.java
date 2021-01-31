@@ -16,12 +16,6 @@ public class LoginAssistant {
         if (username.equals(userAdmin)&&password.equals(passAdmin))
             return new Admin();
 
-        //test
-        if (username.equals("1")&&password.equals("2")){
-            Student student = new Student();
-            student.setUsername("1");
-            return student;
-        }
         MasterManager masterManager = new MasterManager();
         if (masterManager.isExist(username))
             if (masterManager.getPassword(username).equals(password)) {
