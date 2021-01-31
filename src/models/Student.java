@@ -13,6 +13,9 @@ public class Student extends Person implements Serializable {
     public void setLessons(HashMap<Lesson, Double> lessons) {
         this.lessons = lessons;
     }
+    public void addLesson(Lesson lesson){
+        lessons.put(lesson,0.0);
+    }
 
     @Override
     public String toString() {

@@ -45,4 +45,10 @@ public class StudentManager {
 
     }
 
+    public Student getStudent(String username) {
+        return new Student();
+    }
+
+    public void addClass(String username, String selectedCode) {
+    }
 }

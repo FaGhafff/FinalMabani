@@ -69,6 +69,11 @@ public class Class implements Serializable {
         this.students = students;
     }
 
+    public boolean addStudent(Student student){
+        return students.add(student);
+    }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
