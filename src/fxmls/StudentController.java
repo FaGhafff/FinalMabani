@@ -91,6 +91,7 @@ public class StudentController implements Initializable {
         for (SelectUnitStudentModel item : tblSelect.getItems())
             if (item.getSelect().isSelected())
                 selected.add(item.getCode());
+        //username is students username and selected are class ids that student selected
         studentAssistant.saveSelections(username, selected);
         initSelectTable();
     }
