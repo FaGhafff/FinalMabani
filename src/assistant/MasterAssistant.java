@@ -30,13 +30,16 @@ public class MasterAssistant {
         else {
             Lesson lesson = c.getLesson();
             for (Student student : c.getStudents()) {
-                if (student.getLessons().get(lesson) > 9)
+                Student temp = new StudentManager().getStudent(student.getUsername());
+                if (temp.getLessons().get(lesson) > 9)
                     pass++;
                 else
                     fail++;
             }
             list.add(new PieChart.Data("قبول شده", pass));
             list.add(new PieChart.Data("رد شده", fail));
+            System.out.println("fail = " + fail);
+            System.out.println("pass = " + pass);
             return list;
         }
     }
