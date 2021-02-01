@@ -41,9 +41,13 @@ public class ClassController implements Initializable {
         cGrade.setCellValueFactory(new PropertyValueFactory<>("grade"));
         cGrade.setCellFactory(TextFieldTableCell.forTableColumn());
         cGrade.setOnEditCommit(e -> e.getTableView().getItems().get(e.getTablePosition().getRow()).setGrade(e.getNewValue()));
+        cGrade.setEditable(true);
 
+        tblClass.setEditable(true);
         tblClass.getColumns().addAll(cRow,cUsername,cLastName,cFirstName,cGrade);
         tblClass.setItems(masterAssistant.getClassTableData(idClass));
+        System.out.println("ClassController.intiTable");
+        System.out.println(masterAssistant.getClassTableData(idClass).size());
 
     }
 

@@ -71,6 +71,7 @@ public class AdminController implements Initializable {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("addClass.fxml"));
             stage.setScene(new Scene(root));
+            stage.setOnCloseRequest(event -> initTables());
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -93,7 +94,6 @@ public class AdminController implements Initializable {
 
         tblLesson.getColumns().addAll(cRow, cName, cCode, cUnit, cToggle);
         tblLesson.setItems(adminAssistant.getLessonTableData());
-        //todo update table after adding lesson
     }
 
     private void onClickSaveLessons() {
@@ -109,6 +109,7 @@ public class AdminController implements Initializable {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("addLesson.fxml"));
             stage.setScene(new Scene(root));
+            stage.setOnCloseRequest(event -> initTables());
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -135,8 +136,6 @@ public class AdminController implements Initializable {
 
         tblMaster.setItems(adminAssistant.getMasterTableData());
         tblMaster.getItems().forEach(item->item.getSend().setOnAction(e-> onClickSendUserPass(item.getIdNumber())));
-
-        //todo update table after adding new master
     }
 
     private void onClickSendUserPass(String idNumber){
@@ -146,8 +145,9 @@ public class AdminController implements Initializable {
     private void onClickAddMaster() {
         Stage stage = new Stage();
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("addStudent.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("addMaster.fxml"));
             stage.setScene(new Scene(root));
+            stage.setOnCloseRequest(event -> initTables());
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -157,7 +157,6 @@ public class AdminController implements Initializable {
     //student
 
     private void initStudentTable() {
-        //todo set best width for each columns
         TableColumn<StudentAdminModel, Integer> cRow = new TableColumn<>("ردیف");
         cRow.setCellValueFactory(new PropertyValueFactory<>("row"));
 
@@ -186,7 +185,6 @@ public class AdminController implements Initializable {
                         onClickReportCard(studentAdminModel.getUsername())
                 )
         );
-        //todo update table after adding new student
     }
 
     private void onClickReportCard(String username) {
@@ -198,6 +196,7 @@ public class AdminController implements Initializable {
             loader.setController(reportCardController);
             Parent root = loader.load();
             stage.setScene(new Scene(root));
+            stage.setOnCloseRequest(event -> initTables());
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -209,10 +208,26 @@ public class AdminController implements Initializable {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("addStudent.fxml"));
             stage.setScene(new Scene(root));
+            stage.setOnCloseRequest(event -> initTables());
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void initTables(){
+        tblLesson.getItems().clear();
+        tblLesson.getColumns().clear();
+        initLessonTable();
+        tblClass.getItems().clear();
+        tblClass.getColumns().clear();
+        initClassTable();
+        tblMaster.getItems().clear();
+        tblMaster.getColumns().clear();
+        initMasterTable();
+        tblStudent.getItems().clear();
+        tblStudent.getColumns().clear();
+        initStudentTable();
     }
 
     @Override
@@ -239,5 +254,6 @@ public class AdminController implements Initializable {
         btnAddClass.setOnAction(e -> onClickAddClass());
         btnSaveClass.setOnAction(e -> onClickSaveClass());
         initClassTable();
+
     }
 }

@@ -19,8 +19,8 @@ public class ReportCardStudentModel {
         this.masterName = new SimpleStringProperty(masterName);
         this.unit = new SimpleIntegerProperty(unit);
         this.grade = new SimpleDoubleProperty(grade);
-        this.label = new Label();
-        if (pass)
+        this.label = new Label("   ");
+        if (!pass)
             label.setStyle("-fx-background-color: red");
         else
             label.setStyle("-fx-background-color: green");
@@ -68,6 +68,18 @@ public class ReportCardStudentModel {
 
     public SimpleIntegerProperty unitProperty() {
         return unit;
+    }
+
+    public double getGrade() {
+        return grade.get();
+    }
+
+    public SimpleDoubleProperty gradeProperty() {
+        return grade;
+    }
+
+    public void setGrade(double grade) {
+        this.grade.set(grade);
     }
 
     public void setUnit(int unit) {

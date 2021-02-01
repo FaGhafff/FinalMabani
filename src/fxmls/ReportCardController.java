@@ -7,14 +7,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 import tables.ReportCardStudentModel;
-import tools.PDF;
 
-import java.io.File;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class ReportCardController implements Initializable {
@@ -52,22 +48,14 @@ public class ReportCardController implements Initializable {
         lblAve.setText(lblAve.getText() +" "+studentAssistant.getAverage(username));
     }
 
-    //todo
-    private void onClickPDF() {
-        DirectoryChooser directoryChooser = new DirectoryChooser();
-        File file = directoryChooser.showDialog(new Stage());
-        ArrayList<ReportCardStudentModel> list = new ArrayList<>();
-        if (file != null) {
-            PDF pdf = new PDF(username, file, list);
-            pdf.save();
-        }
-    }
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         studentAssistant = new StudentAssistant();
         btnExit.setOnAction(e -> ((Stage) btnExit.getScene().getWindow()).close());
-        btnPDF.setOnAction(e -> onClickPDF());
+        btnPDF.setDisable(true);
+        btnPDF.setVisible(false);
         initTable();
         calculateAverage();
     }

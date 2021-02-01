@@ -93,7 +93,14 @@ public class StudentController implements Initializable {
                 selected.add(item.getCode());
         //username is students username and selected are class ids that student selected
         studentAssistant.saveSelections(username, selected);
+        initTables();
+    }
+
+    private void initTables(){
+        tblSelect.getItems().clear();
+        tblSelect.getColumns().clear();
         initSelectTable();
+        initReportCard();
     }
 
 

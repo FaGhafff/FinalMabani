@@ -70,13 +70,15 @@ public class AddClassController implements Initializable {
         }
     }
 
-    //todo
     private Master getMaster(JFXComboBox<String> comboMaster) {
+        if (comboMaster.getSelectionModel().getSelectedIndex()>-1)
+            return listMasters.get(comboMaster.getSelectionModel().getSelectedIndex());
         return null;
     }
 
-    //todo
     private Lesson getLesson(JFXComboBox<String> comboLesson) {
+        if (comboLesson.getSelectionModel().getSelectedIndex()>-1)
+            return listLessons.get(comboLesson.getSelectionModel().getSelectedIndex());
         return null;
     }
 

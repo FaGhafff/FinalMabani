@@ -73,7 +73,7 @@ public class AddMasterController implements Initializable {
         master.setPhoneNumber(txtPhoneNumber.getText());
         master.setClasses(new HashSet<>());
         if (adminAssistant.addMaster(master))
-            lblMessage.setText("دانشجو اضافه و نام کاربری و رمز عبور پیامک شد.");
+            lblMessage.setText("استاد اضافه و نام کاربری و رمز عبور پیامک شد.");
         else
             lblMessage.setText("خطا");
 

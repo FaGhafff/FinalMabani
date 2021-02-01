@@ -27,9 +27,14 @@ public class ClassManager {
             Student student = studentManager.getStudent(username);
             ArrayList<Class> list = new DataBase().readClasses();
             list.forEach(aClass -> {
-                if (String.valueOf(aClass.getId()).equals(selectedCode))
+                if (String.valueOf(aClass.getId()).equals(selectedCode)) {
                     aClass.getStudents().add(student);
+
+                }
             });
+            DataBase dataBase = new DataBase();
+            dataBase.writeClasses(list);
+
         } catch (IOException e) {
             e.printStackTrace();
         }

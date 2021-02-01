@@ -6,7 +6,6 @@ import models.*;
 import java.io.*;
 import java.util.ArrayList;
 
-//fixme handle EOFException and null for returns
 class DataBase {
     private static String STUDENT_FILE_ADDRESS = "student.dat";
     private static String MASTER_FILE_ADDRESS = "master.dat";
@@ -38,7 +37,7 @@ class DataBase {
     }
 
     protected ArrayList<Student> readStudents() {
-        ArrayList<Student> list = null;
+        ArrayList<Student> list = new ArrayList<>();
         try {
             ObjectInputStream stream = new ObjectInputStream(new FileInputStream(studentFile));
             list = (ArrayList<Student>) stream.readObject();
@@ -88,9 +87,9 @@ class DataBase {
     }
 
     protected ArrayList<Class> readClasses() {
-        ArrayList<Class> list = null;
+        ArrayList<Class> list = new ArrayList<>();
         try {
-            ObjectInputStream stream = new ObjectInputStream(new FileInputStream(lessonFile));
+            ObjectInputStream stream = new ObjectInputStream(new FileInputStream(classFile));
             list = (ArrayList<Class>) stream.readObject();
             stream.close();
         } catch (EOFException e) {
@@ -113,7 +112,7 @@ class DataBase {
     }
 
     protected ArrayList<Lesson> readLessons() {
-        ArrayList<Lesson> list = null;
+        ArrayList<Lesson> list = new ArrayList<>();
         try {
             ObjectInputStream stream = new ObjectInputStream(new FileInputStream(lessonFile));
             list = (ArrayList<Lesson>) stream.readObject();

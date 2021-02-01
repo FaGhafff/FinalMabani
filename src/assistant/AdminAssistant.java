@@ -30,10 +30,11 @@ public class AdminAssistant {
         StudentManager studentManager = new StudentManager();
         list = studentManager.getStudentsList();
         ObservableList<StudentAdminModel> data = FXCollections.observableArrayList();
-        for (Student student : list) {
-            data.add(new StudentAdminModel(list.indexOf(student) + 1, student.getLastName(), student.getFirstName(),
-                    student.getUsername(), student.getPassword()));
-        }
+        if (list != null)
+            for (Student student : list) {
+                data.add(new StudentAdminModel(list.indexOf(student) + 1, student.getLastName(), student.getFirstName(),
+                        student.getUsername(), student.getPassword()));
+            }
         return data;
     }
 
@@ -42,9 +43,10 @@ public class AdminAssistant {
         MasterManager masterManager = new MasterManager();
         list = masterManager.getMastersList();
         ObservableList<MasterAdminModel> data = FXCollections.observableArrayList();
-        for (Master master : list) {
-            data.add(new MasterAdminModel(list.indexOf(master) + 1, master.getFirstName(), master.getLastName(), master.getIdNumber(), master.getPhoneNumber()));
-        }
+        if (list != null)
+            for (Master master : list) {
+                data.add(new MasterAdminModel(list.indexOf(master) + 1, master.getFirstName(), master.getLastName(), master.getIdNumber(), master.getPhoneNumber()));
+            }
         return data;
     }
 
@@ -68,10 +70,15 @@ public class AdminAssistant {
     public ObservableList<LessonAdminModel> getLessonTableData() {
         ObservableList<LessonAdminModel> data = FXCollections.observableArrayList();
         LessonManager lessonManager = new LessonManager();
-        AtomicInteger i= new AtomicInteger(1);
-        lessonManager.getLessonsList().forEach(lesson -> data.add(new LessonAdminModel(i.getAndIncrement(),
-                lesson.getName(), lesson.getId()+"",lesson.getUnit(),lesson.isPresented())));
-        return data;
+        AtomicInteger i = new AtomicInteger(1);
+        try {
+            lessonManager.getLessonsList().forEach(lesson -> data.add(new LessonAdminModel(i.getAndIncrement(),
+                    lesson.getName(), lesson.getId() + "", lesson.getUnit(), lesson.isPresented())));
+            return data;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return data;
+        }
     }
 
     //return lessons where isPresented is true
@@ -90,11 +97,16 @@ public class AdminAssistant {
         ObservableList<ClassAdminModel> data = FXCollections.observableArrayList();
         ClassManager classManager = new ClassManager();
         int i = 1;
-        for (Class aClass : classManager.readAll()) {
-            data.add(new ClassAdminModel(i++, aClass.getLesson().getName(), aClass.getId() + "",
-                    aClass.getMaster().getFirstName() + " " + aClass.getMaster().getLastName(),
-                    aClass.getCapacity(), aClass.isEnable()));
-        }
+        if (classManager.readAll() != null)
+            try {
+                for (Class aClass : classManager.readAll()) {
+                    data.add(new ClassAdminModel(i++, aClass.getLesson().getName(), aClass.getId() + "",
+                            aClass.getMaster().getFirstName() + " " + aClass.getMaster().getLastName(),
+                            aClass.getCapacity(), aClass.isEnable()));
+                }
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
         return data;
     }
 
@@ -106,11 +118,17 @@ public class AdminAssistant {
 
     public ArrayList<Lesson> getLessonsForAddClass() {
         LessonManager lessonManager = new LessonManager();
-        return lessonManager.getLessonsList().stream().filter(Lesson::isPresented).collect(Collectors.toCollection(ArrayList::new));
+        ArrayList<Lesson> list = lessonManager.getLessonsList();
+        ArrayList<Lesson> result = new ArrayList<>();
+        list.forEach(lesson -> {
+            if (lesson.isPresented())
+                result.add(lesson);
+        });
+        return result;
     }
 
     public ArrayList<Master> getMastersForAddClass() {
-        return new ArrayList<>();
+        return new MasterManager().getMastersList();
     }
 
     public void addClass(Class aClass) {
@@ -125,7 +143,8 @@ public class AdminAssistant {
         if (master != null) {
             SMS sms = new SMS(master.getPhoneNumber());
             sms.setMessage("username is : " + master.getUsername() + " password is : " + master.getPassword());
-            sms.send();
+            System.out.println("SMS");
+            System.out.println(sms.send());
         }
     }
     //add student
